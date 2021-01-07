@@ -10,6 +10,12 @@ ul {
 pre {
   background: #F8F9F9;
 }
+body {
+  margin: 50px 50px 30px 30px;
+}
+p {
+  line-height: 25px;
+}
 </style>
 
 <body>
@@ -18,45 +24,54 @@ pre {
 
 <h2>Project</h2>
 
+<p>
 In recent years, technologies such as data science and machine learning have been adopted in various fields.
 In the future, there will be more and more opportunities to learn them from an early stage in various types of school education.
 On the other hand, in order to acquire and utilize such technologies, it is essential to analyze huge amounts of data using graphs and other tools.
+</p>
+<p>
 In this project, I would like to develop the necessary information and tools for screen reader users to learn these technologies by
 relying on auditory information rather than visual information, in preparation for the future.
-</br>
 At present, I have developed two libraries: a library that notifies users of visual status changes on google colaboratory with sound, 
 and an alternative library for plots that allows users to check graph data with sound. 
+</p>
+<p>
 The objective is for screen reader users to be able to run through and understand some typical machine learning tutorials.
-</br>
 Eventually, I also hope that people who cannot see or have difficulty seeing will be able to use the tools for other scientific research, 
 and that they will be able to find a high-paying job such as data scientist.
-</br>
+</p>
 
 <h2>Libraries</h2>
 
+<p>
 I'm developing a variety of tools for Python programming on <a href="https://colab.research.google.com/">Google Colaboratory</a>, 
 considering the ease of preparing a development environment and the relative accessibility of the environment.
 I would like to consider Jupyter Notebook, which is often used in a similar situation, after the accessibility is expected to be improved in future.
 <a href="https://github.com/jupyterlab/team-compass/issues/98">(Progress in accessibility support)</a>
-
+</p>
 
 <h3><a href="https://github.com/hassaku/audio-plot-lib">audio-plot-lib</a></h3>
 
+<p>
 This library provides graph sonification functions in Google Colab
-</br>
+</p>
 
+<p>
 The following is an example of a voiced graph.
 Two graphs, sine wave and cosine wave, are sonified by this library.
 First, click on the next button to activate the audio. Note that this can be omitted in Colab.
-</br>
+</p>
 
 <button id="unmuteButton">Push here to unmute graph</button>
-</br>
 
+<p>
 After pressing the button, next move the mouse cursor appropriately to find if the sound "Enter graph" is played out.
 Then, while you are on the graph image, you can check the values plotted on the graph as pitches by moving the mouse left or right.
+</p>
+<p>
 In the initial state, you can hear the sine wave values. By double-clicking, you can now switch to the cosine value.
 You can also single-click to read out the x and y values for that point.
+</p>
 
 <script crossorigin="anonymous" integrity="sha384-T2yuo9Oe71Cz/I4X9Ac5+gpEa5a8PpJCDlqKYO0CfAuEszu1JrXLl8YugMqYe3sM" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.2.3.min.js" type="text/javascript"></script> 
 <script>
@@ -114,15 +129,17 @@ You can also single-click to read out the x and y values for that point.
   })();
 </script>
 
+<p>
 In addition to generating interactive graphs, there are other ways to create playable graphs. 
 The following generation example is a sonification of the same graph data.
-</br>
+</p>
 
 <audio src="playable.mp3" controls>playable example</audio>
 </br>
 
+<p>
 Use the following sample code on Colab to try out sound-based plotting of various graph data yourself.
-</br>
+</p>
 
 <a href="https://colab.research.google.com/github/hassaku/colab-a11y-utils/blob/master/colab_a11y_util_example.ipynb" rel="nofollow">
   <img src="https://camo.githubusercontent.com/84f0493939e0c4de4e6dbe113251b4bfb5353e57134ffd9fcab6b8714514d4d1/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667" alt="Open example of audio plot lib in Colab" data-canonical-src="https://colab.research.google.com/assets/colab-badge.svg" style="max-width:100%;">
@@ -130,8 +147,10 @@ Use the following sample code on Colab to try out sound-based plotting of variou
 
 <h3><a href="https://github.com/hassaku/colab-a11y-utils">colab-a11y-utils</a></h3>
 
+<p>
 This library provides the following functions in Google Colab
-</br>
+</p>
+
 <ul>
   <li>One beep sound when executed</li>
   <li>Two beep sounds when normal completion</li>
@@ -148,8 +167,9 @@ This library provides the following functions in Google Colab
 
 <h3>Speech Command Recognition</h3>
 
+<p>
 The tutorial on learning voice command recognition by deep learning introduced on the PyTorch official website can be run in a screen reader.
-</br>
+</p>
 
 <a href="https://colab.research.google.com/github/hassaku/DS-and-ML-with-screen-reader/blob/master/speech_command_recognition_tutorial.ipynb" rel="nofollow">
   <img src="https://camo.githubusercontent.com/84f0493939e0c4de4e6dbe113251b4bfb5353e57134ffd9fcab6b8714514d4d1/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667" alt="Open In Colab" data-canonical-src="https://colab.research.google.com/assets/colab-badge.svg" style="max-width:100%;">
@@ -157,18 +177,26 @@ The tutorial on learning voice command recognition by deep learning introduced o
 
 <h3>more?</h3>
 
+<p>
 To be added. Please let me know if you have any requests.
+</p>
 
 <h3>Learning Materials</h3>
 
+<p>
 WIP
+</p>
 
 <h2>Contact</h2>
 
+<p>
 For more information and collaboration, please let me know on <a href="https://github.com/hassaku/DS-and-ML-with-screen-reader/discussions">disucussion page on Github</a>
 or send me an <a href="mailto:hassaku.apps@gmail.com">email</a> directly.
+</p>
 
+<p>
 In particular, it would be great if you could tell me what you would like to see added.
+</p>
 
 </body>
 </html>
