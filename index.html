@@ -163,6 +163,37 @@ This library provides the following functions in Google Colab
   <img src="https://camo.githubusercontent.com/84f0493939e0c4de4e6dbe113251b4bfb5353e57134ffd9fcab6b8714514d4d1/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667" alt="Open example of colab accessibility utilities in Colab" data-canonical-src="https://colab.research.google.com/assets/colab-badge.svg" style="max-width:100%;">
 </a>
 
+
+<h2>Browser Extention Script (Optional)</h2>
+
+<p>
+This script temporarily rewrites the HTML of Google Colab to make it easier to operate with a screen reader.
+It is not required, but if you utilize it, you can eliminate unnecessary focus, make it easier to navigate, 
+and read out the running status with keystrokes.
+</p>
+
+<h3>1. Install Tampermonkey</h3>
+
+<p>
+Tampermonkey is the most popular userscript manager.
+</p>
+
+<ul>
+  <li>
+    <a href="https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd">Edge Addons</a>
+  </li>
+  <li>
+    <a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo">Chrome Web Store</a>
+  </li>
+</ul>
+
+<h3>2. Import the forrowing script</h3>
+
+<p>
+If you already have Tampermonkey installed, just click on the following user script link and you will be taken to a page to import it.
+</p>
+<a href="https://github.com/hassaku/colab-a11y-utils/raw/master/colab_a11y_utils.user.js">colab_a11y_utils.user.js<a>
+
 <h2>Tutorials</h2>
 
 <h3>Linear Regression</h3>
@@ -205,6 +236,18 @@ This website contains the full text of the Python Data Science Handbook by Jake 
 A link to Colab is provided each page so that you can probably learn all about the basics of machine learning by using the library in this project.
 Please feel free to request me any additional features that are essential for reading along with the screen reader.
 </p>
+
+<h2>Google Colab Simple Usage</h2>
+
+<ul>
+  <li>Press Ctrl+Shift+P to display the command palette. Most of the operations can be performed from the command palette, so you just need to remember this.</li>
+	<li>Press Ctrl+M followed by H to display a list of keyboard shortcuts.</li>
+	<li>The basic operation is to write the python code on a cell and press Ctrl+Enter to execute the code. The result of the execution will be displayed directly below the cell, but it may be displayed as an iframe, which may be easily overlooked by some screen readers as it only reads "frame". If you move the focus to the child element, you should be able to access the result.</li>
+	<li>Press Ctrl+M followed by B to add cells</li>
+	<li>Press Ctrl+M followed by D to remove cells</li>
+	<li>Press Ctrl+M followed by I to interrupt runnning</li>
+	<li>Press Ctrl+Q to check running status of the cell if you installed the tampermonkey script</li>
+</ul>
 
 <h2>Contact</h2>
 
