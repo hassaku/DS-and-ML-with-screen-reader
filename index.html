@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-  <title>Data science and machine learning resources for screen reader users</title>
+  <title>Data science and machine learning resources for visually impaired</title>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-6P06G96QZV"></script>
   <script>
@@ -28,7 +28,7 @@ p {
 
 <body>
 
-<h1>Data science and machine learning resources for screen reader users</h1>
+<h1>Data science and machine learning resources for visually impaired</h1>
 
 <p>
 <a href="index_ja.html">日本語版はこちら</a>
@@ -39,42 +39,30 @@ p {
 <h2>Project</h2>
 
 <p>
-In recent years, technologies such as data science and machine learning have been adopted in various fields.
-In the future, there will be more and more opportunities to learn them from an early stage in various types of school education.
-On the other hand, in order to acquire and utilize such technologies, it is essential to analyze huge amounts of data using graphs and other tools.
+In recent years, AI-related technologies, such as data science and machine learning, have been used in various fields. In the future, there will be more and more opportunities to learn about such technologies in school education. Moreover, an essential part of learning data science is the ability to analyze vast amounts of data using graphs and other tools. For the visually impaired, the necessity of using such methods that rely on sight is a serious barrier to learning data science.
 </p>
 <p>
-In this project, I would like to develop the necessary information and tools for screen reader users, such as the visually impaired, to learn these technologies by
-relying on auditory information rather than visual information, in preparation for the future.
-At present, I have developed two libraries: a library that notifies users of visual status changes on google colaboratory with sound, 
-and an alternative library for plots that allows users to check graph data with sound. 
-I have also prepared tutorials on basic machine learning and advanced deep learning using these libraries.
+Therefore, in this project, I would like to organize useful information and develop tools necessary to learn data science and machine learning techniques without relying on sight. At the moment, I have developed a library that notifies visual state changes with sound on Google Colaboratory, and an alternative visualization tool that can convert graphs into audio. I have also created tutorials on basic machine learning and advanced deep learning using these libraries.
 </p>
 <p>
-The objective is for screen reader users to be able to run through and understand some typical machine learning tutorials.
-Eventually, I also hope that people who cannot see or have difficulty seeing will be able to use the tools for other scientific research, 
-and that they will be able to find a high-paying job such as data scientist.
+The goal is that visually impaired people with some programming knowledge and an interest in data science will be able to run and understand a few typical machine learning tutorials. Eventually, I hope that someone will be able to apply the various tools to other fields, such as scientific research. The detailed background of the project can be found in the following blog, if you would like to read it.
 </p>
+
+<a href="https://takashi-hasuo.medium.com/what-would-it-take-to-learn-data-science-without-relying-on-sight-4799524d2108">
+What would it take to learn data science without relying on sight?
+</a>
 
 <h2>Libraries</h2>
 
 <p>
-I'm developing a variety of tools for Python programming on <a href="https://colab.research.google.com/">Google Colaboratory</a>, 
-considering the ease of preparing a development environment and the relative accessibility of the environment.
-I would like to consider Jupyter Notebook, which is often used in a similar situation, after the accessibility is expected to be improved in future.
-<a href="https://github.com/jupyterlab/team-compass/issues/98">(Progress in accessibility support)</a>
+I am developing various Python libraries mainly for use on Google Colaboratory, which is a relatively accessible notebook environment often used in data science. I have also tried to use local environment scripting for the graph sonification library, but it strongly depends on the running environment, so if you have any problems, please contact me.
 </p>
 
 <h3><a href="https://github.com/hassaku/audio-plot-lib">audio-plot-lib</a></h3>
 
 <p>
-This library provides graph sonification functions in Google Colab
-</p>
-
-<p>
-The following is an example of a voiced graph.
-Two graphs, sine wave and cosine wave, are sonified by this library.
-First, click on the next button to activate the audio. Note that this can be omitted in Colab.
+This library converts graph data into sound and playback it to enable users to understand the characteristics of the data. It also provides functions that are essential for data analysis, such as the interactive check of values by tracing them with the mouse cursor.
+The following is an example of a graph that allows you to interactively check the data. Two graphs, one sine wave and one cosine wave, are overlapped and sonified. First of all, please click on the following button to unmute the graph audio. Note that you do not need to click the button on Google Colab.
 </p>
 
 <button id="unmuteButton">Push here to unmute graph</button>
@@ -145,15 +133,14 @@ You can also single-click to read out the x and y values for that point.
 </script>
 
 <p>
-In addition to generating interactive graphs, there are other ways to create playable graphs. 
-The following generation example is a sonification of the same graph data.
+In addition to using the mouse cursor to interactively check the graph data, it is also possible to create a graph that simply plays sounds. If you have no way to move the mouse cursor, this is a suitable option. The following is an example of a graph of the same data in audio format. Play it back and check how the sound changes.
 </p>
 
 <audio src="playable.mp3" controls>playable example</audio>
 </br>
 
 <p>
-Use the following sample code on Colab to try out sound-based plotting of various graph data yourself.
+You can also access the Google Colab example below to try out all the functions while modifying them by yourself. Please check out the basic usage and how to specify options.
 </p>
 
 <a href="https://colab.research.google.com/github/hassaku/audio-plot-lib/blob/master/audio_plot_lib_example.ipynb" rel="nofollow">
@@ -163,7 +150,7 @@ Use the following sample code on Colab to try out sound-based plotting of variou
 <h3><a href="https://github.com/hassaku/colab-a11y-utils">colab-a11y-utils</a></h3>
 
 <p>
-This library provides the following functions in Google Colab
+This library adds the following features to improve usability on Google Colab. Together with the browser extension options described next, I think you will be able to use Google Colab more smoothly without having to navigate around a lot with a screen reader.
 </p>
 
 <ul>
@@ -182,15 +169,13 @@ This library provides the following functions in Google Colab
 <h2>Browser Extention Script (Optional)</h2>
 
 <p>
-This script temporarily rewrites the HTML of Google Colab to make it easier to operate with a screen reader.
-It is not required, but if you utilize it, you can eliminate unnecessary focus, make it easier to navigate, 
-and read out the running status with keystrokes.
+This is a script that partially rewrites HTML to make it easier to operate the screen reader on Google Colab. It is not required to run the tutorial described below, so please install it if you have time.
 </p>
 
 <h3>1. Install Tampermonkey</h3>
 
 <p>
-Tampermonkey is the most popular userscript manager.
+Tampermonkey is a popular browser extension for managing user scripts. It allows you to easily import JavaScript that will affect only specific pages in a generic manner. For more information, please do a google search.
 </p>
 
 <ul>
@@ -207,14 +192,15 @@ Tampermonkey is the most popular userscript manager.
 <p>
 If you already have Tampermonkey installed, just click on the following user script link and you will be taken to a page to import it.
 </p>
-<a href="https://github.com/hassaku/colab-a11y-utils/raw/master/colab_a11y_utils.user.js">colab_a11y_utils.user.js<a>
+
+<a href="https://github.com/hassaku/colab-a11y-utils/raw/master/colab_a11y_utils.user.js">colab_a11y_utils.user.js</a>
 
 <h2>Tutorials</h2>
 
 <h3>Linear Regression</h3>
 
 <p>
-The tutorial on learning linear regression introduced on Python Data Science Handbook can be run in a screen reader.
+In this tutorial, you will learn about the basics of machine learning, the linear regression algorithm, which is also introduced in the Python Data Science Handbook, a learning resource described below.
 </p>
 
 <a href="https://colab.research.google.com/github/hassaku/DS-and-ML-with-screen-reader/blob/master/linear_regression_from_ds_handbook.ipynb" rel="nofollow">
@@ -224,7 +210,7 @@ The tutorial on learning linear regression introduced on Python Data Science Han
 <h3>Speech Command Recognition</h3>
 
 <p>
-The tutorial on learning voice command recognition by deep learning introduced on the PyTorch official website can be run in a screen reader.
+In this tutorial, you will learn how to train a voice command recognizer using deep learning, as described on the official PyTorch website.
 </p>
 
 <a href="https://colab.research.google.com/github/hassaku/DS-and-ML-with-screen-reader/blob/master/speech_command_recognition_tutorial.ipynb" rel="nofollow">
@@ -236,12 +222,8 @@ The tutorial on learning voice command recognition by deep learning introduced o
 <ul>
   <li>Text Classification</li>
   <li>Kaggle Titanic</li>
-  <li>and so on</li>
+  <li>Other requests are welcome!</li>
 </ul>
-
-<p>
-Please let me know if you have any requests.
-</p>
 
 <h2>Learning Materials</h2>
 
@@ -264,13 +246,25 @@ Please feel free to request me any additional features that are essential for re
 	<li>Press Ctrl+Q to check running status of the cell if you installed the tampermonkey script</li>
 </ul>
 
+<h2>Related Projects</h2>
+
+<h3><a href="https://www.desmos.com">Desmos</a></h3>
+
+Desmos is a free online mathematics tool that includes a functional calculator and graphing capabilities. It is also focused on accessibility, and has provided sonified graphs, such as the one developed in this project. Actually, it has been used in many educational fields and exams, and I think it is the best tool to learn mathematics as a basis for data science.
+
+<h3><a href="https://accessiblegraphs.org">Accessible Graphs</a></h3>
+
+This is a free online tool that specializes in the conversion of graph data to sound. It is designed to be simple and easy to use, so you can easily experience the audio graph. The Braille display is also supported, which I think is really excellent.
+
+
 <h2>Contact</h2>
 
 <p>
-For more information and collaboration, please let me know on <a href="https://github.com/hassaku/DS-and-ML-with-screen-reader/discussions">disucussion page on Github</a>
-or send me an <a href="mailto:hassaku.apps@gmail.com">email</a> directly.
+For more information and collaboration, please let me know on disucussion page on Github or send me an email directly.
 In particular, it would be great if you could tell me what you would like to see added.
 </p>
+<a href="https://github.com/hassaku/DS-and-ML-with-screen-reader/discussions">GitHub Discussion Page</a><br />
+<a href="mailto:hassaku.apps@gmail.com">E-mail</a>
 
 <h2>Acknowledgments</h2>
 
