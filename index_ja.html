@@ -34,6 +34,8 @@ p {
 <a href="index.html">English page</a>
 </p>
 
+<iframe title="このyoutube動画は、副音声による画面解説付きで、プロジェクトの概要を説明しているものです" width="560"height="315" class="leftSide" frameborder="0" src=https://youdescribe.org/embed/uYBkDIsXzmY?ad=631aab2873ff460a05c842ce /></iframe>
+
 <iframe title="このyoutube動画は、このページの内容をまとめたものです（英語のみ）" width="560" height="315" src="https://www.youtube.com/embed/W5LQl5o_Twg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <h2>プロジェクトについて</h2>
@@ -188,6 +190,16 @@ Google Colaboratory上で主に動作させることを想定して、各種Pyth
   <img src="https://camo.githubusercontent.com/84f0493939e0c4de4e6dbe113251b4bfb5353e57134ffd9fcab6b8714514d4d1/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667" alt="Open example of audio plot lib in Colab" data-canonical-src="https://colab.research.google.com/assets/colab-badge.svg" style="max-width:100%;">
 </a>
 
+<h4>事例集</h4>
+
+音声グラフの作成例です。再生版とインタラクティブ版のそれぞれを掲載しています。
+
+<ul>
+  <li><a href="examples/ball.html">物理シミュレーション</a></li>
+  <li><a href="examples/orion.html">星座</a></li>
+  <li><a href="examples/temp.html">環境</a></li>
+</ul>
+
 <h3><a href="https://github.com/hassaku/colab-a11y-utils">colab-a11y-utils</a></h3>
 
 <p>
@@ -206,37 +218,6 @@ Google Colaboratory上で主に動作させることを想定して、各種Pyth
 <a href="https://colab.research.google.com/github/hassaku/colab-a11y-utils/blob/master/colab_a11y_util_example.ipynb" rel="nofollow">
   <img src="https://camo.githubusercontent.com/84f0493939e0c4de4e6dbe113251b4bfb5353e57134ffd9fcab6b8714514d4d1/68747470733a2f2f636f6c61622e72657365617263682e676f6f676c652e636f6d2f6173736574732f636f6c61622d62616467652e737667" alt="Open example of colab accessibility utilities in Colab" data-canonical-src="https://colab.research.google.com/assets/colab-badge.svg" style="max-width:100%;">
 </a>
-
-<h2>ブラウザ拡張(オプション)</h2>
-
-<p>
-Google Colab上のスクリーンリーダーの操作をしやすくするために、HTMLを部分的に書き換えるスクリプトです。
-後述するチュートリアルの実行に必須ではないので、余裕があれば導入してみてください。
-</p>
-
-<h3>1. Tampermonkeyをインストール</h3>
-
-<p>
-Tampermonkeyは、人気のあるユーザスクリプト管理用ブラウザ拡張です。
-特定のページのみ、後発的に作用するようなJavaScriptを気軽に導入することが出来ます。
-詳しくは、グーグル検索で調べてみてください。
-</p>
-
-<ul>
-  <li>
-    <a href="https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd">Edge Addons</a>
-  </li>
-  <li>
-    <a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo">Chrome Web Store</a>
-  </li>
-</ul>
-
-<h3>2. 以下のユーザスクリプトをインポート</h3>
-
-<p>
-Tampermonkeyがインストールされていれば、以下のリンクをクリックするだけで、今回用意したブラウザ拡張がインポート出来ると思います。
-</p>
-<a href="https://github.com/hassaku/colab-a11y-utils/raw/master/colab_a11y_utils.user.js">colab_a11y_utils.user.js</a>
 
 <h2>チュートリアル</h2>
 
@@ -286,7 +267,6 @@ Tampermonkeyがインストールされていれば、以下のリンクをク�
 	<li>Ctrl+Mを押した後、Bを押してセルを追加します。</li>
 	<li>Ctrl+Mを押した後、Dを押してセルを削除します。</li>
 	<li>Ctrl+Mを押した後、Iを押してセルの実行を中断します。</li>
-	<li>tampermonkey スクリプトをインストールした場合、Ctrl+Q キーを押してセルの実行状況を確認できます。</li>
 </ul>
 
 <h2>類似プロジェクト</h2>

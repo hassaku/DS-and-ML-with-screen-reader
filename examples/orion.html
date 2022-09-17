@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<title>音声グラフ事例：天体データ</title>
+<script crossorigin="anonymous" integrity="sha384-T2yuo9Oe71Cz/I4X9Ac5+gpEa5a8PpJCDlqKYO0CfAuEszu1JrXLl8YugMqYe3sM" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.2.3.min.js" type="text/javascript"></script>
+<script crossorigin="anonymous" integrity="sha384-98GDGJ0kOMCUMUePhksaQ/GYgB3+NH9h996V88sh3aOiUNX3N+fLXAtry6xctSZ6" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.2.3.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+            Bokeh.set_log_level("info");
+        </script>
+</head>
+<body>
+
+<h1>オリオン座の位置</h1>
+
+<p>
+夜空に浮かぶ星座の中で、有名で見つけやすいものとして、オリオン座があります。
+astroqueryというPythonモジュールを使って、天文座標を音声グラフとして表現してみました。
+音声により、星座の形状が何となくでも掴めるかもしれません。
+</p>
+
+<h2>再生可能な音声グラフ</h2>
+
+<audio src="orion.mp3" controls>ファイル出力版音声グラフ</audio>
+
+<h2>インタラクティブな音声グラフ</h2>
+
+<button id="unmuteButton">このボタンを押して音声再生を有効化してください</button>
+<script>
+        document.getElementById('unmuteButton').addEventListener('click', function() {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            audioGain = audioContext.createGain();
+            panNode = audioContext.createStereoPanner();
+            osc = audioContext.createOscillator();
+            osc.connect(panNode);
+            panNode.connect(audioGain);
+            audioGain.connect(audioContext.destination);
+            osc.start(audioContext.currentTime);
+            audioGain.gain.setValueAtTime(0, audioContext.currentTime);
+            oscTarget = 0;
+        })
+        </script>
+
+<div class="bk-root" data-root-id="1036" id="96f8ce4f-6d2f-4ff5-bbda-0dbd8adaec80"></div>
+<script id="1109" type="application/json">
+          {"4e434630-edd4-4af0-9b48-ec6f6b6f22b7":{"roots":{"references":[{"attributes":{"formatter":{"id":"1041"},"ticker":{"id":"1015"}},"id":"1014","type":"LinearAxis"},{"attributes":{"axis":{"id":"1014"},"dimension":1,"ticker":null},"id":"1017","type":"Grid"},{"attributes":{"text":""},"id":"1037","type":"Title"},{"attributes":{"below":[{"id":"1010"}],"center":[{"id":"1013"},{"id":"1017"}],"js_event_callbacks":{"mouseenter":[{"id":"1028"}],"mouseleave":[{"id":"1029"}],"tap":[{"id":"1027"}]},"left":[{"id":"1014"}],"plot_height":400,"plot_width":400,"renderers":[{"id":"1022"}],"title":{"id":"1037"},"toolbar":{"id":"1018"},"toolbar_location":null,"x_range":{"id":"1002"},"x_scale":{"id":"1006"},"y_range":{"id":"1004"},"y_scale":{"id":"1008"}},"id":"1001","subtype":"Figure","type":"Plot"},{"attributes":{"args":{"label":[0,0,0,0,0,0,0,0,0],"x":[78.63446708333332,81.28276333333334,84.05338875,83.00166666666665,83.85825791666664,85.18969416666665,85.18969625,86.93911999999999,88.79293874999999],"y":[-8.201638333333333,6.349703055555556,-1.2019188888888888,-0.299095,-5.909900833333333,-1.9425733333333333,-1.9425722222222221,-9.669604722222221,7.40706388888889]},"code":"\n    let marginX = 1;\n    let position = cb_data.geometry.x;\n    \n    const multiAxes = false;\n    \nvar minX, maxX, minY, maxY;\nif(multiAxes) {\n  var labeledX = [];\n  var labeledY = [];\n  x.forEach(function(val, idx){\n      if(label[idx] != oscTarget) { return; }\n      labeledX.push(x[idx]);\n      labeledY.push(y[idx]);\n  });\n  minX = Math.min(...labeledX);\n  maxX = Math.max(...labeledX);\n  minY = Math.min(...labeledY);\n  maxY = Math.max(...labeledY);\n} else {\n  minX = Math.min(...x);\n  maxX = Math.max(...x);\n  minY = Math.min(...y);\n  maxY = Math.max(...y);\n}\n\nif((position == Infinity) || (position &lt; minX) || (position &gt; maxX)) {\n    return;\n}\n\nvar diff = [];\nvar nearestIdx = 0;\nx.forEach(function(val, idx){\n    if(label[idx] != oscTarget) {\n        return;\n    }\n    diff[idx] = Math.abs(position - val);\n    nearestIdx = (diff[nearestIdx] &lt; diff[idx]) ? nearestIdx : idx;\n});\n\nlet nearestX = x[nearestIdx];\nlet nearestY = y[nearestIdx];\n\n    if(diff[nearestIdx] &gt; marginX) {\n        return;\n    }\n\n    const gain = 0.4; // max: 1.0\n    osc.type = 'triangle'; // sine, square, sawtooth, triangle\n    osc.frequency.value = 261.626 + (nearestY - minY) / (maxY - minY) * 261.626 // Hz\n    audioGain.gain.linearRampToValueAtTime(gain, audioContext.currentTime + 0.2); // atack\n    audioGain.gain.setTargetAtTime(0, audioContext.currentTime + 0.2, 0.5); // decay, sustain\n\n    let pan = (nearestX - minX) / (maxX - minX) * 2 - 1;\n    panNode.pan.value = pan;  // left:-1 ~ right:1\n    \n    "},"id":"1024","type":"CustomJS"},{"attributes":{"data":{"fill_color":["#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4"],"line_color":["#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4","#1f77b4"],"x":[78.63446708333332,81.28276333333334,84.05338875,83.00166666666665,83.85825791666664,85.18969416666665,85.18969625,86.93911999999999,88.79293874999999],"y":[-8.201638333333333,6.349703055555556,-1.2019188888888888,-0.299095,-5.909900833333333,-1.9425733333333333,-1.9425722222222221,-9.669604722222221,7.40706388888889]},"selected":{"id":"1044"},"selection_policy":{"id":"1043"}},"id":"1019","type":"ColumnDataSource"},{"attributes":{},"id":"1011","type":"BasicTicker"},{"attributes":{"axis":{"id":"1010"},"ticker":null},"id":"1013","type":"Grid"},{"attributes":{"fill_color":{"field":"fill_color"},"line_color":{"field":"line_color"},"x":{"field":"x"},"y":{"field":"y"}},"id":"1020","type":"Scatter"},{"attributes":{},"id":"1043","type":"UnionRenderers"},{"attributes":{},"id":"1015","type":"BasicTicker"},{"attributes":{"children":[{"id":"1032"},{"id":"1033"},{"id":"1035"}]},"id":"1036","type":"Column"},{"attributes":{},"id":"1008","type":"LinearScale"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"field":"fill_color"},"line_alpha":{"value":0.1},"line_color":{"field":"line_color"},"x":{"field":"x"},"y":{"field":"y"}},"id":"1021","type":"Scatter"},{"attributes":{"data_source":{"id":"1019"},"glyph":{"id":"1020"},"hover_glyph":null,"muted_glyph":null,"nonselection_glyph":{"id":"1021"},"selection_glyph":null,"view":{"id":"1023"}},"id":"1022","type":"GlyphRenderer"},{"attributes":{},"id":"1044","type":"Selection"},{"attributes":{"children":[{"id":"1001"},{"id":"1034"}]},"id":"1035","type":"Row"},{"attributes":{"children":[{"id":"1030"}]},"id":"1034","type":"Column"},{"attributes":{"text":"&lt;p&gt;\u3053\u3053\u306b\u306f\u30b0\u30e9\u30d5\u3068\u30b9\u30e9\u30a4\u30c0\u30fc\u304c\u914d\u7f6e\u3055\u308c\u3066\u3044\u307e\u3059\u3002\u30de\u30a6\u30b9\u3092\u3082\u3063\u3066\u3044\u308b\u306e\u3067\u3042\u308c\u3070\u3001\u30b0\u30e9\u30d5\u4e0a\u3092\u306a\u305e\u308b\u3053\u3068\u306b\u3088\u308a\u3001\u30b0\u30e9\u30d5\u4e0a\u306e\u5024\u3092\u97f3\u58f0\u3067\u78ba\u8a8d\u3059\u308b\u3053\u3068\u304c\u3067\u304d\u307e\u3059\u3002\u30de\u30a6\u30b9\u3092\u3082\u3063\u3066\u3044\u306a\u3044\u5834\u5408\u3067\u3082\u3001\u30b9\u30e9\u30a4\u30c0\u30fc\u3092\u52d5\u304b\u3059\u3053\u3068\u306b\u3088\u308a\u3001\u5024\u3092\u78ba\u8a8d\u3059\u308b\u3053\u3068\u304c\u3067\u304d\u307e\u3059\u3002&lt;/p&gt;"},"id":"1033","type":"Div"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"1025"}]},"id":"1018","type":"Toolbar"},{"attributes":{"text":"&lt;h2&gt;\u97f3\u58f0\u30b0\u30e9\u30d5&lt;/h2&gt;"},"id":"1032","type":"Div"},{"attributes":{},"id":"1004","type":"DataRange1d"},{"attributes":{},"id":"1002","type":"DataRange1d"},{"attributes":{"end":88.79293874999999,"format":"0[.]00","js_property_callbacks":{"change:value":[{"id":"1031"}]},"start":78.63446708333332,"step":1.2698089583333338,"title":"\u30e9\u30d9\u30eb 0","value":78.63446708333332},"id":"1030","type":"Slider"},{"attributes":{"code":"\n        window.speechSynthesis.cancel();\n        let msg = new SpeechSynthesisUtterance(`graph\u304b\u3089\u51fa\u307e\u3057\u305f`);\n        msg.lang = 'ja-JP';\n        window.speechSynthesis.speak(msg);\n        "},"id":"1029","type":"CustomJS"},{"attributes":{"code":"\n        window.speechSynthesis.cancel();\n        let msg = new SpeechSynthesisUtterance(`graph\u306b\u5165\u308a\u307e\u3057\u305f`);\n        msg.lang = 'ja-JP';\n        window.speechSynthesis.speak(msg);\n        "},"id":"1028","type":"CustomJS"},{"attributes":{},"id":"1006","type":"LinearScale"},{"attributes":{"args":{"label":[0,0,0,0,0,0,0,0,0],"x":[78.63446708333332,81.28276333333334,84.05338875,83.00166666666665,83.85825791666664,85.18969416666665,85.18969625,86.93911999999999,88.79293874999999],"y":[-8.201638333333333,6.349703055555556,-1.2019188888888888,-0.299095,-5.909900833333333,-1.9425733333333333,-1.9425722222222221,-9.669604722222221,7.40706388888889]},"code":"\n    let position = cb_obj.x;\n    const multiAxes = false;\n    \nvar minX, maxX, minY, maxY;\nif(multiAxes) {\n  var labeledX = [];\n  var labeledY = [];\n  x.forEach(function(val, idx){\n      if(label[idx] != oscTarget) { return; }\n      labeledX.push(x[idx]);\n      labeledY.push(y[idx]);\n  });\n  minX = Math.min(...labeledX);\n  maxX = Math.max(...labeledX);\n  minY = Math.min(...labeledY);\n  maxY = Math.max(...labeledY);\n} else {\n  minX = Math.min(...x);\n  maxX = Math.max(...x);\n  minY = Math.min(...y);\n  maxY = Math.max(...y);\n}\n\nif((position == Infinity) || (position &lt; minX) || (position &gt; maxX)) {\n    return;\n}\n\nvar diff = [];\nvar nearestIdx = 0;\nx.forEach(function(val, idx){\n    if(label[idx] != oscTarget) {\n        return;\n    }\n    diff[idx] = Math.abs(position - val);\n    nearestIdx = (diff[nearestIdx] &lt; diff[idx]) ? nearestIdx : idx;\n});\n\nlet nearestX = x[nearestIdx];\nlet nearestY = y[nearestIdx];\n\n    \n        window.speechSynthesis.cancel();\n        let msg = new SpeechSynthesisUtterance(`\u30a8\u30c3\u30af\u30b9\u306f${nearestX}\u3002\u30ef\u30a4\u306f${nearestY}`);\n        msg.lang = 'ja-JP';\n        window.speechSynthesis.speak(msg);\n        \n    "},"id":"1027","type":"CustomJS"},{"attributes":{"args":{"label":[0,0,0,0,0,0,0,0,0],"slider":{"id":"1030"},"target":0,"x":[78.63446708333332,81.28276333333334,84.05338875,83.00166666666665,83.85825791666664,85.18969416666665,85.18969625,86.93911999999999,88.79293874999999],"y":[-8.201638333333333,6.349703055555556,-1.2019188888888888,-0.299095,-5.909900833333333,-1.9425733333333333,-1.9425722222222221,-9.669604722222221,7.40706388888889]},"code":"\n        oscTarget = target;\n        let marginX = 1.2698089583333338;\n        let position = slider.value;\n        \n    const multiAxes = false;\n    \nvar minX, maxX, minY, maxY;\nif(multiAxes) {\n  var labeledX = [];\n  var labeledY = [];\n  x.forEach(function(val, idx){\n      if(label[idx] != oscTarget) { return; }\n      labeledX.push(x[idx]);\n      labeledY.push(y[idx]);\n  });\n  minX = Math.min(...labeledX);\n  maxX = Math.max(...labeledX);\n  minY = Math.min(...labeledY);\n  maxY = Math.max(...labeledY);\n} else {\n  minX = Math.min(...x);\n  maxX = Math.max(...x);\n  minY = Math.min(...y);\n  maxY = Math.max(...y);\n}\n\nif((position == Infinity) || (position &lt; minX) || (position &gt; maxX)) {\n    return;\n}\n\nvar diff = [];\nvar nearestIdx = 0;\nx.forEach(function(val, idx){\n    if(label[idx] != oscTarget) {\n        return;\n    }\n    diff[idx] = Math.abs(position - val);\n    nearestIdx = (diff[nearestIdx] &lt; diff[idx]) ? nearestIdx : idx;\n});\n\nlet nearestX = x[nearestIdx];\nlet nearestY = y[nearestIdx];\n\n    if(diff[nearestIdx] &gt; marginX) {\n        return;\n    }\n\n    const gain = 0.4; // max: 1.0\n    osc.type = 'triangle'; // sine, square, sawtooth, triangle\n    osc.frequency.value = 261.626 + (nearestY - minY) / (maxY - minY) * 261.626 // Hz\n    audioGain.gain.linearRampToValueAtTime(gain, audioContext.currentTime + 0.2); // atack\n    audioGain.gain.setTargetAtTime(0, audioContext.currentTime + 0.2, 0.5); // decay, sustain\n\n    let pan = (nearestX - minX) / (maxX - minX) * 2 - 1;\n    panNode.pan.value = pan;  // left:-1 ~ right:1\n    \n        setTimeout(function(){\n        window.speechSynthesis.cancel();\n        let msg = new SpeechSynthesisUtterance(`\u30a8\u30c3\u30af\u30b9\u306f${nearestX}\u3002\u30ef\u30a4\u306f${nearestY}`);\n        msg.lang = 'ja-JP';\n        window.speechSynthesis.speak(msg);\n        }, 3000);\n        "},"id":"1031","type":"CustomJS"},{"attributes":{"callback":{"id":"1024"},"tooltips":null},"id":"1025","type":"HoverTool"},{"attributes":{},"id":"1041","type":"BasicTickFormatter"},{"attributes":{"source":{"id":"1019"}},"id":"1023","type":"CDSView"},{"attributes":{"formatter":{"id":"1039"},"ticker":{"id":"1011"}},"id":"1010","type":"LinearAxis"},{"attributes":{},"id":"1039","type":"BasicTickFormatter"}],"root_ids":["1036"]},"title":"Bokeh Application","version":"2.2.3"}}
+        </script>
+<script type="text/javascript">
+          (function() {
+            var fn = function() {
+              Bokeh.safely(function() {
+                (function(root) {
+                  function embed_document(root) {
+                    
+                  var docs_json = document.getElementById('1109').textContent;
+                  var render_items = [{"docid":"4e434630-edd4-4af0-9b48-ec6f6b6f22b7","root_ids":["1036"],"roots":{"1036":"96f8ce4f-6d2f-4ff5-bbda-0dbd8adaec80"}}];
+                  root.Bokeh.embed.embed_items(docs_json, render_items);
+                
+                  }
+                  if (root.Bokeh !== undefined) {
+                    embed_document(root);
+                  } else {
+                    var attempts = 0;
+                    var timer = setInterval(function(root) {
+                      if (root.Bokeh !== undefined) {
+                        clearInterval(timer);
+                        embed_document(root);
+                      } else {
+                        attempts++;
+                        if (attempts > 100) {
+                          clearInterval(timer);
+                          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                        }
+                      }
+                    }, 10, root)
+                  }
+                })(window);
+              });
+            };
+            if (document.readyState != "loading") fn();
+            else document.addEventListener("DOMContentLoaded", fn);
+          })();
+        </script>
+
+<a href="../index_ja.html">もどる</a>
+</body>
+</html>
